@@ -1,6 +1,5 @@
-"""
-lintcode 题目，http://www.lintcode.com/zh-cn/problem/digit-counts/
-"""
+# lintcode-3-统计数字
+# http://www.lintcode.com/zh-cn/problem/digit-counts/
 
 
 class Solution:

@@ -1,8 +1,5 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
-# lintcode
-# 9. Fizz Buzz 问题 http://www.lintcode.com/zh-cn/problem/fizz-buzz/
+# lintcode-9-Fizz Buzz 问题
+# http://www.lintcode.com/zh-cn/problem/fizz-buzz/
 
 
 result = []

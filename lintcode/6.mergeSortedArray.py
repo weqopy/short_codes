@@ -1,8 +1,5 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
-# lintcode
-# 6. 合并排序数组 http://www.lintcode.com/zh-cn/problem/merge-two-sorted-arrays/
+# lintcode-6-合并排序数组
+# http://www.lintcode.com/zh-cn/problem/merge-two-sorted-arrays/
 
 
 # 使用 for 结构重组两个有序列表
