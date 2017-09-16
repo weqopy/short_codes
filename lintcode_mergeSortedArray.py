@@ -11,8 +11,6 @@ class Solution:
         # write your code here
         result = []
         tt = []
-        if len(A) < len(B):
-            A, B = B, A
         for i in A:
             for j in B:
                 if i >= j:
