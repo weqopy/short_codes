@@ -1,5 +1,9 @@
 # !/usr/bin/env python
 # -*- coding:utf-8 -*-
+"""
+lintcode 题目，http://www.lintcode.com/zh-cn/problem/a-b-problem/
+"""
+
 
 lt = [2, 3, 7, 0]
 target = 9
