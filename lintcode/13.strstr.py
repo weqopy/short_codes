@@ -6,21 +6,30 @@ class Solution:
     def strStr(self, source, target):
         if source is None or target is None:
             return -1
-        current, index = 0, 0
+        # current, index = 0, 0
         ln_s = len(source)
         ln_t = len(target)
-        while current <= ln_s - ln_t:
-            temp = current
-            while index != ln_t:
-                if target[index] != source[current]:
-                    break
+        # while current <= ln_s - ln_t:
+        #     temp = current
+        #     while index != ln_t:
+        #         if target[index] != source[current]:
+        #             break
+        #         else:
+        #             index += 1
+        #             current += 1
+        #     if index == ln_t:
+        #         return current - ln_t
+        #     current = temp + 1
+        #     index = 0
+        for i in range(ln_s):
+            k = i
+            for j in range(ln_t):
+                if target[j] == source[k]:
+                    if j == ln_t - 1:
+                        return i
+                    k += 1
                 else:
-                    index += 1
-                    current += 1
-            if index == ln_t:
-                return current - ln_t
-            current = temp + 1
-            index = 0
+                    break
         return -1
 
 

@@ -26,6 +26,22 @@ class Solution:
         return result + tt
 
 
+class NewSolution:
+    def mergeSortedArray(self, A, B):
+        i, j = 0, 0
+        result = []
+        while i < len(A) and j < len(B):
+            if A[i] < B[j]:
+                result.append(A[i])
+                i += 1
+            else:
+                result.append(B[j])
+                j += 1
+        result += A[i:]
+        result += B[j:]
+        return result
+
+
 # 验证
 A1 = [3, 7, 8, 9, 12]
 B1 = [5, 6, 10, 13, 25, 30]
@@ -36,7 +52,9 @@ B3 = [5, 7]
 As = [A1, A2, A3]
 Bs = [B1, B2, B3]
 
-res = Solution()
+res1 = Solution()  # 效果相对略好
+res2 = NewSolution()
 for A in As:
     for B in Bs:
-        print(res.mergeSortedArray(A, B))
+        print(res1.mergeSortedArray(A, B))
+        print(res2.mergeSortedArray(A, B))
