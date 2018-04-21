@@ -20,3 +20,21 @@ class Solution:
             for j in range(i + 1, len(numbers)):
                 if numbers[i] + numbers[j] == target:
                     return [i, j]
+
+    def betterWay(self, numbers, target):
+        L = {}
+        result = [0, 0]
+        for i in range(len(numbers)):
+            tmp = target - numbers[i]
+            if tmp not in L:
+                L[numbers[i]] = i + 1
+            else:
+                result[0] = L[tmp]
+                result[1] = i + 1
+                break
+        return result
+
+
+s = Solution()
+r = s.betterWay([4, 3, 7, 2], 9)
+print(r)
