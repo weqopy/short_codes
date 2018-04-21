@@ -29,12 +29,32 @@ class Solution:
             if tmp not in L:
                 L[numbers[i]] = i + 1
             else:
-                result[0] = L[tmp]
-                result[1] = i + 1
+                result[0] = L[tmp] - 1
+                result[1] = i
                 break
         return result
 
 
-s = Solution()
-r = s.betterWay([4, 3, 7, 2], 9)
+# 对于已排序整数数组，可以首尾相加，与 target 对比，较小则首下标右移，较大则尾下标左移
+
+
+class Solution_2:
+    def twoSum(self, numbers, target):
+        if numbers is None or len(numbers) == 0:
+            return None
+        i = 0
+        j = len(numbers) - 1
+        while i < j:
+            tmp = numbers[i] + numbers[j]
+            if tmp < target:
+                i += 1
+            elif tmp > target:
+                j += 1
+            else:
+                return [i, j]
+        return None
+
+
+s = Solution_2()
+r = s.twoSum([2, 3, 4, 5, 7], 9)
 print(r)
