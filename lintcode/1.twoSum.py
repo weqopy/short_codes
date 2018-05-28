@@ -1,12 +1,11 @@
 # lintcode-1-A + B 问题
 # http://www.lintcode.com/zh-cn/problem/a-b-problem/
 
-
 lt = [2, 3, 7, 0]
 target = 9
 
 
-class Good_Solution:
+class Solution:
     """docstring for Solution"""
 
     def twoSum(self, nums, target):
@@ -25,19 +24,14 @@ class Good_Solution:
                 temp[target - nums[i]] = i
 
 
-a = Good_Solution()
-# print(a.twoSum(lt, target))
+import unittest
 
 
-class My_Solution:
-    """docstring for My_Solution"""
+class testGood_Solution(unittest.TestCase):
+    def test_args(self):
+        self.assertFalse(Solution().twoSum([3], 4))
+        self.assertEqual(Solution().twoSum([2, 3, 7, 0], 9), [0, 2])
 
-    def twoSum(self, nums, target):
-        """
-        :type nums: List[int]
-        :type target: int
-        :rtype:
-        """
-        if len(nums) <= 1:
-            return False
-        pass
+
+if __name__ == '__main__':
+    unittest.main()
