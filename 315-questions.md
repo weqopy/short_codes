@@ -26,6 +26,8 @@ IronPython 微软.Net平台
 
 ### 6、位和字节的关系？
 
+一个字节由八个二进制位构成
+
 ### 7、b、B、KB、MB、GB 的关系？
 
 1024
@@ -76,19 +78,12 @@ N -> 10: int(v, N)
 ip_sr = '10.3.9.12'
 
 def convert(ip):
-
 	list_ip = ip_sr.split('.')
-
 	bin_rt = []
-
 	for i in list_ip:
-
 		bin_i = bin(int(i)).replace('0b', '')
-
 		eight_bin_i = '0' * (8 - len(bin_i)) + bin_i
-
 		bin_rt.append(eight_bin_i)
-
 	return int(''.join(bin_rt), 2)
 
 print(convert(ip_sr))  # 167971084
@@ -122,11 +117,33 @@ or有短路现象，如果为真，后面的不执行
 
 ### 13、ascii、unicode、utf-8、gbk 区别？
 
+> 1.ANSI即为ASCII编码，为一个字节，只用到0~127号字符。
+>
+> 2.Unicode编码为万国码，包含几乎世界上的所有字符，一般情况下为两个字节。
+>
+> 3.GBK编码为中国特有编码，但也是在ANSI基础上演变出来的，包含两个字节，其中中文编码与Unicode的中文编码不一样。
+>
+> 4.UTF-8为Unicode的一种实现编码，Unicode编码可以通过一定的规则进行转变。
+
 ### 14、字节码和机器码的区别？
+
+机器码**是电脑的CPU可直接解读的数据**
+
+字节码（Bytecode）是一种包含执行程序、由一序列 op 代码/数据对 组成的**二进制文件**。**字节码是一种中间码**，它比机器码更抽象，需要直译器转译后才能成为机器码的中间代码。
 
 ### 15、三元运算规则以及应用场景？
 
+`and` 有假则假，全真则真
+
+`or` 有真则真，全假则假
+
+`not` 非真则假，非假则真
+
 ### 16、列举 Python2和Python3的区别？
+
+> 1. print，语句；函数
+> 2. `xrange` /`range` ；range
+> 3. 2 默认旧式类，3默认新式类；新式类是采用广度优先搜索，旧式类采用深度优先搜索；新式类对象可以直接通过`__class__`属性获取自身类型:type
 
 ### 17、用一行代码实现数值交换：
 
@@ -140,21 +157,71 @@ a, b = b, a
 
 ### 18、Python3和Python2中 int 和 long的区别？
 
+python3 统一为 int，支持高精度整数运算
+
 ### 19、xrange和range的区别？
+
+xrange 返回迭代器对象，range 返回列表
 
 ### 20、文件操作时：xreadlines和readlines的区别？
 
 ### 21、列举布尔值为False的常见值？
 
+0 [] None False '' "" {} ()
+
 ### 22、字符串、列表、元组、字典每个常用的5个方法？
+
+```python
+# string
+len(string)
+string.format()
+string.index(obj)
+string.join(sql)
+string.replace(str1, str2, num)
+string.split(str="", num=string.count(str))
+# list
+len(list)
+list.append('a')
+list.pop()
+max(list) min(list)
+list.index(obj)
+list.insert(index, obj)
+list.sort()
+# tuple
+len max min 
+tuple(seq)
+tuple.index(obj)
+# dict
+len(dict)
+dict.get(key, default=None)
+dict.has_key(key)
+dict.keys()
+dict.items()
+```
+
+
 
 ### 23、lambda表达式格式以及应用场景？
 
+`lambda x: x ** 2 for x in range(4)` 
+
+部分只需快速返回数据处
+
 ### 24、pass的作用？
+
+空语句，一般作占位符用
 
 ### 25、*arg和**kwarg作用
 
+不定数量参数，元组、字典
+
 ### 26、is和==的区别
+
+is 对比对象 ID
+
+== 对比对象 值
+
+当对象占用空间较小时，is 返回 == 相同值，数字范围 -5:256
 
 ### 27、简述Python的深浅拷贝以及应用场景？
 
