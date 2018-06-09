@@ -43,10 +43,10 @@ IronPython 微软.Net平台
 ### 9、通过代码实现如下转换：
 
 > 二进制转换成十进制：v = “0b1111011”
-> 十进制转换成二进制：v = 18 
-> 八进制转换成十进制：v = “011” 
-> 十进制转换成八进制：v = 30 
-> 十六进制转换成十进制：v = “0x12” 
+> 十进制转换成二进制：v = 18
+> 八进制转换成十进制：v = “011”
+> 十进制转换成八进制：v = 30
+> 十六进制转换成十进制：v = “0x12”
 > 十进制转换成十六进制：v = 87
 
 
@@ -93,17 +93,17 @@ print(convert(ip_sr))  # 167971084
 
 ### 12、求结果：
 
->v1 = 1 or 3 # 1 
+>v1 = 1 or 3 # 1
 >
->v2 = 1 and 3 # 3 
+>v2 = 1 and 3 # 3
 >
->v3 = 0 and 2 and 1 # 0 
+>v3 = 0 and 2 and 1 # 0
 >
->v4 = 0 and 2 or 1 # 1 
+>v4 = 0 and 2 or 1 # 1
 >
->v5 = 0 and 2 or 1 or 4 # 1 
+>v5 = 0 and 2 or 1 or 4 # 1
 >
->v6 = 0 or False and 1 # False 
+>v6 = 0 or False and 1 # False
 
 ```
 全为and，如果都为真，则返回最后一个变量值；如果为假，则返回第一个假值
@@ -165,6 +165,9 @@ xrange 返回迭代器对象，range 返回列表
 
 ### 20、文件操作时：xreadlines和readlines的区别？
 
+readlines 返回列表
+xreadlines 返回迭代器
+
 ### 21、列举布尔值为False的常见值？
 
 0 [] None False '' "" {} ()
@@ -188,7 +191,7 @@ list.index(obj)
 list.insert(index, obj)
 list.sort()
 # tuple
-len max min 
+len max min
 tuple(seq)
 tuple.index(obj)
 # dict
@@ -203,7 +206,7 @@ dict.items()
 
 ### 23、lambda表达式格式以及应用场景？
 
-`lambda x: x ** 2 for x in range(4)` 
+`lambda x: x ** 2`
 
 部分只需快速返回数据处
 
@@ -229,18 +232,17 @@ is 对比对象 ID
 
 ### 29、Python的可变类型和不可变类型？
 
+可变类型：字典、列表
+不可变类型：数字、字符串、元组
+
 ### 30、求结果：
 
 ```python
 v = dict.fromkeys(['k1','k2'],[])
-
 v[‘k1’].append(666)
-
-print(v)
-
-v[‘k1’] = 777 
-
-print(v)
+print(v)  # {'k1': [666], 'k2': [666]}
+v[‘k1’] = 777
+print(v)  # {'k1': 777, 'k2': [666]}
 ```
 
 ### 31、求结果：
@@ -248,18 +250,38 @@ print(v)
 ```python
 def num():
     return [lambda x: i * x for i in range(4)]
-print([m(2) for m in num()])
+print([m(2) for m in num()])  # [6, 6, 6]
 ```
+
+[[Python 之 for循环中的lambda](https://www.cnblogs.com/liuq/p/6073855.html)]
 
 ### 32、列举常见的内置函数？
 
+```
+len list tuple split join max min map reduce filter
+```
+
 ### 33、filter、map、reduce的作用？
+
+> filter 筛选元素
+> map 依次对数组中元素应用函数
+> reduce 依次将数组中元素前后应用函数
 
 ### 34、一行代码实现9*9乘法表
 
+```python
+lt = [[f'{x} * {y} = ' + str(x * y) for y in range(1, 10)] for x in range(1, 10)]
+print(lt)
+```
+
 ### 35、如何安装第三方模块？以及用过哪些第三方模块？
 
+`pip install ***`
+> flask django request beautifulsoup
+
 ### 36、至少列举8个常用模块都有那些？
+
+> os sys math collections functools request beautifulsoup
 
 ### 37、re的match和search区别？
 
@@ -267,37 +289,98 @@ print([m(2) for m in num()])
 
 ### 39、求结果： a. [ i % 2 for i in range(10) ] b. ( i % 2 for i in range(10) )
 
+`[0, 1, 0, 1, 0, 1, 0, 1, 0, 1]`
+`<generator object <genexpr> at 0x105f9abf8>`
+
 ### 40、求结果： a. 1 or 2 b. 1 and 2 c. 1 < (2==2) d. 1 < 2 == 2
+
+1
+2
+False
+True
 
 ### 41、def func(a,b=[]) 这种写法有什么坑？
 
+b 为可变类型，会产生带入参数的情况。
+可改为：
+```python
+def func(a, b=None):
+    if b is None:
+        b = []
+```
+
 ### 42、如何实现 “1,2,3” 变成 [‘1’,’2’,’3’] ?
+
+`[str(x) for x in '1, 2, 3'.split(',')]`
 
 ### 43、如何实现[‘1’,’2’,’3’]变成[1,2,3] ?
 
-### 44、比较： a = [1,2,3] 和 b = [(1),(2),(3) ] 以及 b = [(1,),(2,),(3,) ] 的区别？
+`[int(x) for x in ['1', '2', '3']]`
+
+### 44、比较： a = [1, 2, 3] 和 b = [(1), (2), (3)] 以及 c = [(1, ), (2, ), (3, )] 的区别？
+
+`a == b`
+`a != c`
+> 单个元素的元组，需要在元素后加逗号，否则圆括号会被识别为数学符号中的‘小括号’，
+> 作用于数字本身，仍然等于原数字
 
 ### 45、如何用一行代码生成[1,4,9,16,25,36,49,64,81,100] ?
 
+`[i ** 2 for i in range(1, 11)]`
+
 ### 46、一行代码实现删除列表中重复的值 ?
+
+`list(set(seq))`
 
 ### 47、如何在函数中设置一个全局变量 ?
 
+> 使用 global 关键字
+
 ### 48、logging模块的作用？以及应用场景？
+
+> 可以进行标准的日志记录。
+> 开发过程中的信息反馈记录、错误提示等。
 
 ### 49、请用代码简答实现stack 。
 
 ### 50、常用字符串格式化哪几种？
 
+```python
+% format f
+'%s world' %('hello')
+'{} world'.format('hello')
+h = 'hello'
+f'{h} world'
+```
+
 ### 51、简述 生成器、迭代器、可迭代对象 以及应用场景？
 
 ### 52、用Python实现一个二分查找的函数。
 
+```python
+def func(target, seq):
+    start = 0
+    end = len(seq)
+    while start < end:
+        mid = (start + end) // 2
+        if target < seq[mid]:
+            end = mid
+        elif target > seq[mid]:
+            start = mid
+        else:
+            return mid
+    return mid
+```
+
 ### 53、谈谈你对闭包的理解？
+
+> 装饰器的原理
 
 ### 54、os和sys模块的作用？
 
 ### 55、如何生成一个随机数？
+
+> 使用 random 模块
 
 ### 56、如何使用python删除一个文件？
 
@@ -337,17 +420,17 @@ print([m(2) for m in num()])
 
 ### 74、写代码并实现：
 
-> Given an array of integers, return indices of the two numbers such that they add up to a specific target.You may assume that each input would 
+> Given an array of integers, return indices of the two numbers such that they add up to a specific target.You may assume that each input would
 >
-> have exactly one solution, and you may not use the same element twice. 
+> have exactly one solution, and you may not use the same element twice.
 >
 > Example:
 >
->          Given nums = [2, 7, 11, 15], target = 9, 
+>          Given nums = [2, 7, 11, 15], target = 9,
 >
-> Because nums[0] + nums[1] = 2 + 7 = 9, 
+> Because nums[0] + nums[1] = 2 + 7 = 9,
 >
->           return [0, 1] 
+>           return [0, 1]
 
 ### 75、json序列化时，可以处理的数据类型有哪些？如何定制支持datetime类型？
 
@@ -477,7 +560,7 @@ print([m(2) for m in num()])
 ### 19、在对name做了唯一索引前提下，简述以下区别：
 
 ```sql
-select * from tb wherename = ‘Oldboy-Wupeiqi’ 
+select * from tb wherename = ‘Oldboy-Wupeiqi’
 select * from tb wherename = ‘Oldboy-Wupeiqi’ limit1
 ```
 
@@ -514,7 +597,7 @@ select * from tb wherename = ‘Oldboy-Wupeiqi’ limit1
 
 ### 34、列举redis支持的过期策略。
 
-### 35、MySQL 里有 2000w 数据，redis 中只存 20w 的数据，如何保证 redis 中都是热点数据？ 
+### 35、MySQL 里有 2000w 数据，redis 中只存 20w 的数据，如何保证 redis 中都是热点数据？
 
 ### 36、写代码，基于redis的列表实现 先进先出、后进先出队列、优先级队列。
 
@@ -707,10 +790,10 @@ select * from tb wherename = ‘Oldboy-Wupeiqi’ limit1
 ### 86、以下SQLAlchemy的字段是否正确？如果不正确请更正：
 
 ```sql
-from datetime import datetime 
-from sqlalchemy.ext.declarative 
-import declarative_base 
-from sqlalchemy import Column, Integer, String, DateTime 
+from datetime import datetime
+from sqlalchemy.ext.declarative
+import declarative_base
+from sqlalchemy import Column, Integer, String, DateTime
 Base = declarative_base()
 classUserInfo(Base):
 __tablename__ = 'userinfo'
@@ -855,4 +938,4 @@ ctime = Column(DateTime, default=datetime.now())
 
 ### 154、最近在研究什么新技术？
 
-### 155、是否了解过领域驱动模型？	
+### 155、是否了解过领域驱动模型？
