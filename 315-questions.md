@@ -378,13 +378,38 @@ def func(target, seq):
 
 ### 54、os和sys模块的作用？
 
+> os 系统中文件及目录
+> sys 请求解释器行为的接口
+
 ### 55、如何生成一个随机数？
 
 > 使用 random 模块
+```python
+import random
+
+print(random.randint(1, 10))  # 产生 1 到 10 的一个整数型随机数
+print(random.random())  # 产生 0 到 1 之间的随机浮点数
+print(random.uniform(1.1, 5.4))  # 产生  1.1 到 5.4 之间的随机浮点数，区间可以不是整数
+print(random.choice('tomorrow'))  # 从序列中随机选取一个元素
+print(random.randrange(1, 100, 2))  # 生成从1到100的间隔为2的随机整数
+a = [1, 3, 5, 6, 7]  # 将序列a中的元素顺序打乱
+random.shuffle(a)
+print(a)
+```
 
 ### 56、如何使用python删除一个文件？
 
+```python
+# 使用 os.remove()
+import os
+
+os.remove('file_name')
+```
+
 ### 57、谈谈你对面向对象的理解？
+
+> 对象是一个独立个体，可以有相应行为、操作
+> 以对象为单位进行目标设计
 
 ### 58、Python面向对象中的继承有什么特点？
 
@@ -394,7 +419,7 @@ def func(target, seq):
 
 ### 61、是否使用过functools中的函数？其作用是什么？
 
-### 62、列举面向对象中带爽下划线的特殊方法，如：__new__、__init__
+### 62、列举面向对象中带双下划线的特殊方法，如：__new__、__init__
 
 ### 63、如何判断是函数还是方法？
 
@@ -420,9 +445,7 @@ def func(target, seq):
 
 ### 74、写代码并实现：
 
-> Given an array of integers, return indices of the two numbers such that they add up to a specific target.You may assume that each input would
->
-> have exactly one solution, and you may not use the same element twice.
+> Given an array of integers, return indices of the two numbers such that they add up to a specific target.You may assume that each input would have exactly one solution, and you may not use the same element twice.
 >
 > Example:
 >
@@ -432,7 +455,57 @@ def func(target, seq):
 >
 >           return [0, 1]
 
+```python
+class Solution:
+    def twoSum(self, target, nums):
+        tmp_dict = {}
+        for i in range(len(nums)):
+            if nums[i] not in tmp_dict:
+                tmp_dict[target - nums[i]] = i
+            else:
+                return [tmp_dict[nums[i]], i]
+        return None
+```
+
 ### 75、json序列化时，可以处理的数据类型有哪些？如何定制支持datetime类型？
+
+> 序列化，把变量从内存中变成可存储或传输的过程
+
+```json
+dict: object,
+list, tuple: array,
+str: string,
+int, float: number,
+True: true,
+False: false,
+None: null
+```
+
+```python
+# 定制类以支持 json 序列化 datetime 类型
+import json
+from datetime import datetime
+
+
+class Custom_Datetime(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, datetime):
+            return obj.strftime('%Y-%m-%d %H:%M:%S')
+        elif isinstance(obj, date):
+            return obj.strftime('%Y-%m-%d')
+        else:
+            return json.JSONEncoder.default(self, obj)
+
+
+def main():
+    now = datetime.now()
+    print(json.dumps({'now': now}, cls=Custom_Datetime))
+
+
+if __name__ == '__main__':
+    main()
+
+```
 
 ### 76、json序列化时，默认遇到中文会转换成unicode，如果想要保留中文怎么办？
 
