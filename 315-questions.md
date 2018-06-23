@@ -285,7 +285,13 @@ print(lt)
 
 ### 37、re 的 match 和 search 区别？
 
+> match 从字符串首部匹配，成功返回 Match object，失败返回 None，只匹配一个
+> search 在整个字符串中进行匹配，成功返回 Match object, 失败返回 None, 只匹配一个
+
 ### 38、什么是正则的贪婪匹配？
+
+> 总是尝试匹配尽可能多的字符。
+> 加入 `?` 后为非贪婪匹配。
 
 ### 39、求结果： a. [i % 2 for i in range(10) ] b. ( i % 2 for i in range(10) )
 
@@ -340,6 +346,35 @@ def func(a, b=None):
 
 > 可以进行标准的日志记录。
 > 开发过程中的信息反馈记录、错误提示等。
+```python
+import logging
+import logging.handlers
+import datetime
+
+
+logger = logging.getLogger('log_test')
+logger.setLevel(logging.DEBUG)
+
+
+rf_handler = logging.handlers.TimedRotatingFileHandler(
+    'all.log', when='midnight', interval=1, backupCount=7, atTime=datetime.time(0, 0, 0, 0))
+rf_handler.setFormatter(logging.Formatter(
+    '%(asctime)s - %(levelname)s - %(message)s'))
+
+f_handler = logging.FileHandler('error.log')
+f_handler.setLevel(logging.ERROR)
+f_handler.setFormatter(logging.Formatter(
+    '%(asctime)s - %(levelname)s - %(filename)s[:%(lineno)d] - %(message)s'))
+
+logger.addHandler(rf_handler)
+logger.addHandler(f_handler)
+
+logger.debug('debug message')
+logger.info('info message')
+logger.warning('warning message')
+logger.error('error message')
+logger.critical('critical message')
+```
 
 ### 49、请用代码简答实现 stack 。
 
@@ -354,6 +389,10 @@ f'{h} world'
 ```
 
 ### 51、简述 生成器、迭代器、可迭代对象 以及应用场景？
+
+> 迭代器：带状态的对象，在调用`next()`方法时返回容器中的下一个值。任何实现了`__iter__` `__next__`方法的对象都是迭代器。
+> 生成器：一种特殊的迭代器，仅需要`yield`关键字
+> 可迭代对象：实现了`__iter__`方法，返回一个迭代器对象。
 
 ### 52、用 Python 实现一个二分查找的函数。
 
@@ -413,29 +452,164 @@ os.remove('file_name')
 
 ### 58、Python 面向对象中的继承有什么特点？
 
+> 1：在继承中基类的构造（`__init__`()方法）不会被自动调用，它需要在其派生类的构造中亲自专门调用。
+> 2：在调用基类的方法时，需要加上基类的类名前缀，且需要带上self参数变量。区别在于类中调用普通函数时并不需要带上self参数
+> 3：Python总是首先查找对应类型的方法，如果它不能在派生类中找到对应的方法，它才开始到基类中逐个查找。（先在本类中查找调用的方法，找不到才去基类中找）。
+
 ### 59、面向对象深度优先和广度优先是什么？
+
+> 深度优先，优先纵向进行，到底部后返回原点开始第二条路径纵向进行
+> 广度优先，优先横向进行，一条路径可途径所有节点
 
 ### 60、面向对象中 super 的作用？
 
+```python
+def super(cls, inst):
+    mro = inst.__class__.mro()
+    return mro[mro.index(cls) + 1]
+```
+
+> 在 inst 的 MRO 列表上搜索 cls 的下一个类
+
 ### 61、是否使用过 functools 中的函数？其作用是什么？
 
-### 62、列举面向对象中带双下划线的特殊方法，如：__new__、__init__
+### 62、列举面向对象中带双下划线的特殊方法，如：`__new__`、`__init__`
+
+> `__del__`, `__eq__`, `__get__`, `__set__`
 
 ### 63、如何判断是函数还是方法？
 
+> 一个可调用对象是方法和函数，和这个对象无关，仅和这个对象是否与类或实例绑定有关（bound method）。
+> 实例方法，在类中未和类绑定，是函数；在实例中，此实例方法与实例绑定，即变成方法。
+
 ### 64、静态方法和类方法区别？
+
+> @staticmethod; @classmethod
+> 静态方法，无参数要求；类方法第一个参数必须默认传类，一般习惯用 cls
+> 函数；方法
 
 ### 65、列举面向对象中的特殊成员以及应用场景
 
+> `__doc__` 表示类的描述信息
+> `__module__` 表示操作对象所在模块
+> `__class__` 表示操作对象所属的类
+> `__init__` 构造方法，通过类创建对象时自动运行
+> `__del__` 析构方法，当对象在内存中被释放时自动触发
+> `__call__` 对象后面加括号，触发执行。 # 构造方法的执行是由创建对象触发的，即：对象 = 类名() ；而对于 `__call__` 方法的执行是由对象后加括号触发的，即：对象() 或者 类()()
+> `__dict__` 类或对象中的所有成员
+> `__str__` 如果一个类中定义了`__str__`方法，那么在打印 对象 时，默认输出该方法的返回值。
+> `__getitem__`、`__setitem__`、`__delitem__` 用于索引操作，如字典。以上分别表示获取、设置、删除数据
+> `__getslice__`、`__setslice__`、`__delslice__` 该三个方法用于分片操作，如：列表
+> `__iter__` 用于迭代器，之所以列表、字典、元组可以进行for循环，是因为类型内部定义了 `__iter__`
+> `__new__` 和 `__metaclass__` 元类，类的创建
+
 ### 66、1、2、3、4、5 能组成多少个互不相同且无重复的三位数
+
+> 5 ** 3
+> 125
 
 ### 67、什么是反射？以及应用场景？
 
+> 反射就是通过字符串的形式，导入模块；通过字符串的形式，去模块寻找指定函数，并执行。利用字符串的形式去对象（模块）中操作（查找/获取/删除/添加）成员，一种基于字符串的事件驱动。
+
 ### 68、metaclass 作用？以及应用场景？
+
+> 创建类。
+> 主要用途是创建 API
+
+> 为什么要使用 metaclass 类而不是函数？
+> 1.意图更加清晰
+> 2.可以使用 OOP 编程
+> 3.可以更好地组织代码
+> 4.可以使用`__new__`, `__init__`, `__call__`等特殊方法
 
 ### 69、用尽量多的方法实现单例模式。
 
+1. 使用模块。将相关函数和数据定义在一个模块中，就可以获得一个单例对象。
+2. 使用特殊方法`__new__`。
+```python
+class Singleton:
+    _instance = None
+
+    def __new__(cls, *args, **kwargs):
+        if not cls._instance:
+            cls._instance = super(Singleton, cls).__new__(cls, *args, **kwargs)
+        return cls._instance
+
+
+class Myclass(Singleton):
+    a = 1
+
+
+one = Myclass()
+two = Myclass()
+
+print(one == two, one is two, id(one), id(two))
+```
+3. 装饰器
+```python
+from functools import wraps
+
+
+def singleton(cls):
+    instance = {}
+
+    @wraps(cls)
+    def getinstance(*args, **kwargs):
+        if cls not in instance:
+            instance[cls] = cls(*args, **kwargs)
+        return instance[cls]
+    return getinstance
+
+
+@singleton
+class MyClass:
+    a = 1
+```
+4. 元类
+```python
+class Singleton(type):
+    _instance = {}
+
+    def __call__(cls, *args, **kwargs):
+        if cls not in cls._instance:
+            cls._instance[cls] = super(
+                Singleton, cls).__call__(*args, **kwargs)
+        return cls._instance[cls]
+
+
+class MyClass(metaclass=Singleton):
+    pass
+
+```
+
 ### 70、装饰器的写法以及应用场景。
+
+```python
+import functools
+
+def log(func):
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        print('call {}'.format(func.__name__))
+        return func(*args, **kwargs)
+    return wrapper
+
+def log(text):
+    def decorator(func):
+        @functools.wraps(func)
+        def wrapper(*args, **kw):
+            print('%s %s():' % (text, func.__name__))
+            return func(*args, **kw)
+        return wrapper
+    return decorator
+```
+
+> 应用场景
+> 1. 注入参数（提供默认参数，生成参数）
+> 2. 记录函数行为（日志、缓存、计时等）
+> 3. 预处理／后处理（配置上下文等）
+> 4. 修改调用时的上下文（线程异步或者并行，类方法）
 
 ### 71、异常处理写法以及如何主动跑出异常（应用场景）
 
@@ -605,7 +779,7 @@ if __name__ == '__main__':
 
 ### 7、常见 SQL（必备）
 
-详见武沛齐博客：https://www.cnblogs.com/wupeiqi/articles/5729934.html
+> 详见武沛齐博客：https://www.cnblogs.com/wupeiqi/articles/5729934.html
 
 
 ### 8、简述触发器、函数、视图、存储过程？
@@ -636,9 +810,6 @@ if __name__ == '__main__':
 select * from tb wherename = ‘Oldboy-Wupeiqi’
 select * from tb wherename = ‘Oldboy-Wupeiqi’ limit1
 ```
-
-
-
 
 ### 20、1000w 条数据，使用 limit offset 分页时，为什么越往后翻越慢？如何解决？
 
@@ -734,11 +905,9 @@ select * from tb wherename = ‘Oldboy-Wupeiqi’ limit1
 
 ### 17、列举 Http 请求中常见的请求头？
 
-###24、django、flask、tornado 框架的比较？
+### 24、django、flask、tornado 框架的比较？
 
 ### 25、什么是 wsgi？
-
-
 
 ### 26、django 请求的生命周期？
 
