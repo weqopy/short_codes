@@ -778,6 +778,16 @@ if __name__ == '__main__':
 
 # 77、什么是断言？应用场景？
 
+> 检查一个条件，如为真则继续；如为假则抛出 AssertError 并且包含错误信息
+
+*使用场景*
+- 防御型的编程
+- 运行时检查程序逻辑
+- 检查约定
+- 程序常量
+- 检查文档
+- 测试代码
+
 # 78、有用过 with statement 吗？它的好处是什么？
 
 > 处理文件时使用
@@ -796,6 +806,54 @@ for i in all_files:
 ```
 
 # 80、简述 yield 和 yield from 关键字。
+
+> `yield` 是定义生成器的一种方式，包含 `yield` 语句的函数就是一个生成器对象
+> 调用一个生成器函数，返回的是一个迭代器对象，迭代器控制生成器的执行，当函数运行到第一个 `yield` 语句时暂停，将 `yield` 表达式后的值返回给调用者；当生成器函数被再次调用时，直接从上次暂停的 `yield` 表达式处继续运行。
+> 函数重新运行时， `yield` 会先接收一个值作为结果，然后继续运行。如果调用者使用 `next` 函数或者 `__next__()` 方法，则默认返回给 `yield` 表达式 `None` 值；使用 `send()` 方法则传递一个值作为 `yield` 表达式的结果。
+
+```python
+def wine():
+    print('first yield...')
+    # 直接 yield 返回值
+    yield 1
+    print('second yield...')
+    yield 2
+
+ww = wine()
+print(next(ww))
+
+# **输出：**
+first yield...
+1
+
+print(next(ww))
+
+# **输出：**
+second yield...
+2
+
+
+def wine():
+    print('first yield...')
+    x = yield 1
+    print(x)
+    print('second yield...')
+    yield 2
+
+ww = wine()
+print(next(ww))
+
+# **输出：**
+first yield...
+1
+
+print(ww.send('the result of first yield...'))
+
+# **输出：**
+the result of first yield...
+second yield...
+2
+```
 
 # ** 第二部分 网络编程和并发（34 题）**
 
