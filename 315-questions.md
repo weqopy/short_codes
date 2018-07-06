@@ -19,9 +19,13 @@
 ### 5、Python 解释器种类以及特点？
 
 CPython 官方解释器
+
 IPython 基于 CPython，增强交互
+
 PyPy 动态编译，提高速度
+
 JPython Java 平台
+
 IronPython 微软. Net 平台
 
 ### 6、位和字节的关系？
@@ -35,18 +39,27 @@ IronPython 微软. Net 平台
 ### 8、请至少列举 5 个 PEP8 规范（越多越好）。
 
 导入：每行一个导入，标准库、第三方库、应用程序指定导入
+
 缩进：4 个空格
+
 空格：避免不必要处空格，空格应在各种符号后添加
+
 行长度：79 字符，换行可以使用反斜杠，最好使用圆括号。换行点要在操作符的后边敲回车。
+
 空行：类和 top - level 函数定义之间空两行；类中的方法定义之间空一行；函数内逻辑无关段落之间空一行；其他地方尽量不要再空行。
 
 ### 9、通过代码实现如下转换：
 
 > 二进制转换成十进制：v = “0b1111011”
+>
 > 十进制转换成二进制：v = 18
+>
 > 八进制转换成十进制：v = “011”
+>
 > 十进制转换成八进制：v = 30
+>
 > 十六进制转换成十进制：v = “0x12”
+>
 > 十进制转换成十六进制：v = 87
 
 
@@ -88,24 +101,24 @@ def convert(ip):
     return int(''.join(bin_rt), 2)
 
 
-print(convert(ip_sr))  ### 167971084
+print(convert(ip_sr))  # 167971084
 ```
 
 ### 11、python 递归的最大层数？
 
 ### 12、求结果：
 
->v1 = 1 or 3  ### 1
+>v1 = 1 or 3  # 1
 >
->v2 = 1 and 3  ### 3
+>v2 = 1 and 3  # 3
 >
->v3 = 0 and 2 and 1  ### 0
+>v3 = 0 and 2 and 1  # 0
 >
->v4 = 0 and 2 or 1  ### 1
+>v4 = 0 and 2 or 1  # 1
 >
->v5 = 0 and 2 or 1 or 4  ### 1
+>v5 = 0 and 2 or 1 or 4  # 1
 >
->v6 = 0 or False and 1  ### False
+>v6 = 0 or False and 1  # False
 
 ```
 全为 and，如果都为真，则返回最后一个变量值；如果为假，则返回第一个假值
@@ -168,6 +181,7 @@ xrange 返回迭代器对象，range 返回列表
 ### 20、文件操作时：xreadlines 和 readlines 的区别？
 
 readlines 返回列表
+
 xreadlines 返回迭代器
 
 ### 21、列举布尔值为 False 的常见值？
@@ -177,14 +191,14 @@ xreadlines 返回迭代器
 ### 22、字符串、列表、元组、字典每个常用的 5 个方法？
 
 ```python
-### string
+# string
 len(string)
 string.format()
 string.index(obj)
 string.join(sql)
 string.replace(str1, str2, num)
 string.split(str="", num=string.count(str))
-### list
+# list
 len(list)
 list.append('a')
 list.pop()
@@ -192,18 +206,17 @@ max(list) min(list)
 list.index(obj)
 list.insert(index, obj)
 list.sort()
-### tuple
+# tuple
 len max min
 tuple(seq)
 tuple.index(obj)
-### dict
+# dict
 len(dict)
 dict.get(key, default=None)
 dict.has_key(key)
 dict.keys()
 dict.items()
 ```
-
 
 ### 23、lambda 表达式格式以及应用场景？
 
@@ -241,9 +254,9 @@ is 对比对象 ID
 ```python
 v = dict.fromkeys(['k1', 'k2'], [])
 v[‘k1’].append(666)
-print(v)  ### {'k1': [666], 'k2': [666]}
+print(v)  # {'k1': [666], 'k2': [666]}
 v[‘k1’] = 777
-print(v)  ### {'k1': 777, 'k2': [666]}
+print(v)  # {'k1': 777, 'k2': [666]}
 ```
 
 ### 31、求结果：
@@ -255,7 +268,7 @@ def num():
     return [lambda x: i * x for i in range(4)]
 
 
-print([m(2) for m in num()])  ### [6, 6, 6]
+print([m(2) for m in num()])  # [6, 6, 6]
 ```
 
 [[Python 之 for 循环中的 lambda](https: // www.cnblogs.com / liuq / p / 6073855.html)]
@@ -291,11 +304,13 @@ print(lt)
 ### 37、re 的 match 和 search 区别？
 
 > match 从字符串首部匹配，成功返回 Match object，失败返回 None，只匹配一个
+>
 > search 在整个字符串中进行匹配，成功返回 Match object, 失败返回 None, 只匹配一个
 
 ### 38、什么是正则的贪婪匹配？
 
 > 总是尝试匹配尽可能多的字符。
+>
 > 加入 `?` 后为非贪婪匹配。
 
 ### 39、求结果： a. [i % 2 for i in range(10) ] b. ( i % 2 for i in range(10) )
@@ -306,8 +321,11 @@ print(lt)
 ### 40、求结果： a. 1 or 2 b. 1 and 2 c. 1 <(2==2) d. 1 < 2 == 2
 
 1
+
 2
+
 False
+
 True
 
 ### 41、def func(a,b=[]) 这种写法有什么坑？
@@ -315,13 +333,9 @@ True
 b 为可变类型，会产生带入参数的情况。
 可改为：
 ```python
-
-
 def func(a, b=None):
     if b is None:
         b = []
-
-
 ```
 
 ### 42、如何实现 “1,2,3” 变成 [‘1’,’2’,’3’] ?
@@ -337,6 +351,7 @@ def func(a, b=None):
 `a == b`
 `a != c`
 > 单个元素的元组，需要在元素后加逗号，否则圆括号会被识别为数学符号中的‘小括号’，
+>
 > 作用于数字本身，仍然等于原数字
 
 ### 45、如何用一行代码生成 [1,4,9,16,25,36,49,64,81,100] ?
@@ -354,6 +369,7 @@ def func(a, b=None):
 ### 48、logging 模块的作用？以及应用场景？
 
 > 可以进行标准的日志记录。
+>
 > 开发过程中的信息反馈记录、错误提示等。
 ```python
 import logging
@@ -388,8 +404,6 @@ logger.critical('critical message')
 ### 49、请用代码简答实现 stack 。
 
 ```python
-
-
 class Stack:
     def __init__(self):
         self.stack = []
@@ -408,8 +422,6 @@ class Stack:
 
     def top(self):
         return self.stack[-1]
-
-
 ```
 
 ### 50、常用字符串格式化哪几种？
@@ -425,14 +437,14 @@ f'{h} world'
 ### 51、简述 生成器、迭代器、可迭代对象 以及应用场景？
 
 > 迭代器：带状态的对象，在调用 `next()` 方法时返回容器中的下一个值。任何实现了 `__iter__` `__next__` 方法的对象都是迭代器。
+>
 > 生成器：一种特殊的迭代器，仅需要 `yield` 关键字
+>
 > 可迭代对象：实现了 `__iter__` 方法，返回一个迭代器对象。
 
 ### 52、用 Python 实现一个二分查找的函数。
 
 ```python
-
-
 def func(target, seq):
     start = 0
     end = len(seq)
@@ -445,8 +457,6 @@ def func(target, seq):
         else:
             return mid
     return mid
-
-
 ```
 
 ### 53、谈谈你对闭包的理解？
@@ -456,6 +466,7 @@ def func(target, seq):
 ### 54、os 和 sys 模块的作用？
 
 > os 系统中文件及目录
+>
 > sys 请求解释器行为的接口
 
 ### 55、如何生成一个随机数？
@@ -464,12 +475,12 @@ def func(target, seq):
 ```python
 import random
 
-print(random.randint(1, 10))  ### 产生 1 到 10 的一个整数型随机数
-print(random.random())  ### 产生 0 到 1 之间的随机浮点数
-print(random.uniform(1.1, 5.4))  ### 产生  1.1 到 5.4 之间的随机浮点数，区间可以不是整数
-print(random.choice('tomorrow'))  ### 从序列中随机选取一个元素
-print(random.randrange(1, 100, 2))  ### 生成从 1 到 100 的间隔为 2 的随机整数
-a = [1, 3, 5, 6, 7]  ### 将序列 a 中的元素顺序打乱
+print(random.randint(1, 10))  # 产生 1 到 10 的一个整数型随机数
+print(random.random())  # 产生 0 到 1 之间的随机浮点数
+print(random.uniform(1.1, 5.4))  # 产生  1.1 到 5.4 之间的随机浮点数，区间可以不是整数
+print(random.choice('tomorrow'))  # 从序列中随机选取一个元素
+print(random.randrange(1, 100, 2))  # 生成从 1 到 100 的间隔为 2 的随机整数
+a = [1, 3, 5, 6, 7]  # 将序列 a 中的元素顺序打乱
 random.shuffle(a)
 print(a)
 ```
@@ -486,31 +497,30 @@ os.remove('file_name')
 ### 57、谈谈你对面向对象的理解？
 
 > 对象是一个独立个体，可以有相应行为、操作
+>
 > 以对象为单位进行目标设计
 
 ### 58、Python 面向对象中的继承有什么特点？
 
 > 1：在继承中基类的构造（`__init__`() 方法）不会被自动调用，它需要在其派生类的构造中亲自专门调用。
+>
 > 2：在调用基类的方法时，需要加上基类的类名前缀，且需要带上 self 参数变量。区别在于类中调用普通函数时并不需要带上 self 参数
+>
 > 3：Python 总是首先查找对应类型的方法，如果它不能在派生类中找到对应的方法，它才开始到基类中逐个查找。（先在本类中查找调用的方法，找不到才去基类中找）。
 
 ### 59、面向对象深度优先和广度优先是什么？
 
 > 深度优先，优先纵向进行，到底部后返回原点开始第二条路径纵向进行
+>
 > 广度优先，优先横向进行，一条路径可途径所有节点
 
 ### 60、面向对象中 super 的作用？
 
 ```python
-
-
 def super(cls, inst):
     mro = inst.__class__.mro()
     return mro[mro.index(cls) + 1]
-
-
 ```
-
 > 在 inst 的 MRO 列表上搜索 cls 的下一个类
 
 ### 61、是否使用过 functools 中的函数？其作用是什么？
@@ -522,33 +532,48 @@ def super(cls, inst):
 ### 63、如何判断是函数还是方法？
 
 > 一个可调用对象是方法和函数，和这个对象无关，仅和这个对象是否与类或实例绑定有关（bound method）。
+>
 > 实例方法，在类中未和类绑定，是函数；在实例中，此实例方法与实例绑定，即变成方法。
 
 ### 64、静态方法和类方法区别？
 
 > @staticmethod; @classmethod
+>
 > 静态方法，无参数要求；类方法第一个参数必须默认传类，一般习惯用 cls
 > 函数；方法
 
 ### 65、列举面向对象中的特殊成员以及应用场景
 
 > `__doc__` 表示类的描述信息
+>
 > `__module__` 表示操作对象所在模块
+>
 > `__class__` 表示操作对象所属的类
+>
 > `__init__` 构造方法，通过类创建对象时自动运行
+>
 > `__del__` 析构方法，当对象在内存中被释放时自动触发
-### 构造方法的执行是由创建对象触发的，即：对象 = 类名 () ；而对于 `__call__` 方法的执行是由对象后加括号触发的，即：对象 () 或者 类 ()()
+>
+>构造方法的执行是由创建对象触发的，即：对象 = 类名 () ；而对于 `__call__` 方法的执行是由对象后加括号触发的，即：对象 () 或者 类 ()()
+>
 > `__call__` 对象后面加括号，触发执行。
+>
 > `__dict__` 类或对象中的所有成员
+>
 > `__str__` 如果一个类中定义了 `__str__` 方法，那么在打印 对象 时，默认输出该方法的返回值。
+>
 > `__getitem__`、`__setitem__`、`__delitem__` 用于索引操作，如字典。以上分别表示获取、设置、删除数据
+>
 > `__getslice__`、`__setslice__`、`__delslice__` 该三个方法用于分片操作，如：列表
+>
 > `__iter__` 用于迭代器，之所以列表、字典、元组可以进行 for 循环，是因为类型内部定义了 `__iter__`
+>
 > `__new__` 和 `__metaclass__` 元类，类的创建
 
 ### 66、1、2、3、4、5 能组成多少个互不相同且无重复的三位数
 
 > 5 ** 3
+>
 > 125
 
 ### 67、什么是反射？以及应用场景？
@@ -558,6 +583,7 @@ def super(cls, inst):
 ### 68、metaclass 作用？以及应用场景？
 
 > 创建类。
+>
 > 主要用途是创建 API
 
 > 为什么要使用 metaclass 类而不是函数？
@@ -571,8 +597,6 @@ def super(cls, inst):
 1. 使用模块。将相关函数和数据定义在一个模块中，就可以获得一个单例对象。
 2. 使用特殊方法 `__new__`。
 ```python
-
-
 class Singleton:
     _instance = None
 
@@ -610,13 +634,9 @@ def singleton(cls):
 @singleton
 class MyClass:
     a = 1
-
-
 ```
 4. 元类
 ```python
-
-
 class Singleton(type):
     _instance = {}
 
@@ -629,8 +649,6 @@ class Singleton(type):
 
 class MyClass(metaclass=Singleton):
     pass
-
-
 ```
 
 ### 70、装饰器的写法以及应用场景。
@@ -655,8 +673,6 @@ def log(text):
             return func(*args, **kw)
         return wrapper
     return decorator
-
-
 ```
 
 > 应用场景
@@ -670,8 +686,11 @@ def log(text):
 ### 72、什么是面向对象的 mro
 
 > Python 支持面向对象编程，支持多重继承
+>
 > 在方法调用时需要对当前类及基类搜索，以确定方法所在的位置
+>
 > 搜索顺序，即是‘方法解析顺序’（*Method Resolution Order*, MRO）
+>
 > Python2.3 之后采用一种称为 **C3** 的方式计算 *MRO*
 
 ```
@@ -695,7 +714,6 @@ mro(F) = [F] + merge( [D,B,A,O] , [E,C,A,O] , [D,E] )
        = [F,D,B] + merge( [A,O] , [E,C,A,O] , [E] )
        = ....
        = [F,D,B,E,C,A,O]
-
 ```
 
 ### 73、isinstance 作用以及应用场景？
@@ -715,8 +733,6 @@ mro(F) = [F] + merge( [D,B,A,O] , [E,C,A,O] , [D,E] )
 > return [0, 1]
 
 ```python
-
-
 class Solution:
     def twoSum(self, target, nums):
         tmp_dict = {}
@@ -726,8 +742,6 @@ class Solution:
             else:
                 return [tmp_dict[nums[i]], i]
         return None
-
-
 ```
 
 ### 75、json 序列化时，可以处理的数据类型有哪些？如何定制支持 datetime 类型？
@@ -745,9 +759,9 @@ None: null
 ```
 
 ```python
-### 定制类以支持 json 序列化 datetime 类型
-### json.dumps 将 Python 数据结构转换为 JSON， json.loads 将一个 JSON 编码的字符串转换回一个 Python 数据结构
-### 如果要处理的是文件而不是字符串，可以使用 json.dump() 和 json.load() 来编码和解码 JSON 数据。
+# 定制类以支持 json 序列化 datetime 类型
+# json.dumps 将 Python 数据结构转换为 JSON， json.loads 将一个 JSON 编码的字符串转换回一个 Python 数据结构
+# 如果要处理的是文件而不是字符串，可以使用 json.dump() 和 json.load() 来编码和解码 JSON 数据。
 import json
 from datetime import datetime
 
@@ -769,9 +783,7 @@ def main():
 
 if __name__ == '__main__':
     main()
-
 ```
-
 ### 76、json 序列化时，默认遇到中文会转换成 unicode，如果想要保留中文怎么办？
 
 > 使用参数 `ensure_ascii=False`
@@ -780,7 +792,7 @@ if __name__ == '__main__':
 
 > 检查一个条件，如为真则继续；如为假则抛出 AssertError 并且包含错误信息
 
-* 使用场景 *
+*使用场景*
 - 防御型的编程
 - 运行时检查程序逻辑
 - 检查约定
@@ -791,6 +803,7 @@ if __name__ == '__main__':
 ### 78、有用过 with statement 吗？它的好处是什么？
 
 > 处理文件时使用
+>
 > 文件调用结束后自动关闭，
 
 ### 79、使用代码实现查看列举目录下的所有文件。
@@ -808,13 +821,15 @@ for i in all_files:
 ### 80、简述 yield 和 yield from 关键字。
 
 > `yield` 是定义生成器的一种方式，包含 `yield` 语句的函数就是一个生成器对象
+>
 > 调用一个生成器函数，返回的是一个迭代器对象，迭代器控制生成器的执行，当函数运行到第一个 `yield` 语句时暂停，将 `yield` 表达式后的值返回给调用者；当生成器函数被再次调用时，直接从上次暂停的 `yield` 表达式处继续运行。
+>
 > 函数重新运行时， `yield` 会先接收一个值作为结果，然后继续运行。如果调用者使用 `next` 函数或者 `__next__()` 方法，则默认返回给 `yield` 表达式 `None` 值；使用 `send()` 方法则传递一个值作为 `yield` 表达式的结果。
 
 ```python
 def wine():
     print('first yield...')
-    ### 直接 yield 返回值
+    # 直接 yield 返回值
     yield 1
     print('second yield...')
     yield 2
@@ -822,13 +837,13 @@ def wine():
 ww = wine()
 print(next(ww))
 
-### ** 输出：**
+# ** 输出：**
 first yield...
 1
 
 print(next(ww))
 
-### ** 输出：**
+# ** 输出：**
 second yield...
 2
 
@@ -843,13 +858,13 @@ def wine():
 ww = wine()
 print(next(ww))
 
-### ** 输出：**
+# ** 输出：**
 first yield...
 1
 
 print(ww.send('the result of first yield...'))
 
-### ** 输出：**
+# ** 输出：**
 the result of first yield...
 second yield...
 2
