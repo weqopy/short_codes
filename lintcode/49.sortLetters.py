@@ -23,3 +23,33 @@ class Solution:
             elif i in string.ascii_uppercase:  # A-Z
                 uppercase.append(i)
         return ''.join(lowercase + uppercase)
+
+
+class newSolution:
+    """
+    @param: chars: The letter array you should sort by Case
+    @return: nothing
+    """
+
+    def sortLetters(self, str):
+        import string
+
+        low = string.ascii_lowercase
+        up = string.ascii_uppercase
+
+        left = 0
+        right = len(str) - 1
+        lt = list(str)
+        while left < right:
+            while left < right and lt[left] in low:
+                left += 1
+            if left < right:
+                lt[left], lt[right] = lt[right], lt[left]
+                right -= 1
+
+            while left < right and lt[right] in up:
+                right -= 1
+            if left < right:
+                lt[left], lt[right] = lt[right], lt[left]
+                left += 1
+        return ''.join(lt)
