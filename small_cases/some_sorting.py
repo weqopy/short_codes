@@ -1,7 +1,8 @@
 # Python 排序算法
-
-
 arr = [5, 3, 2, 2, 1, 0]
+
+# ---------- quickSort ----------
+#
 
 
 def quickSort(arr, left, right):
@@ -30,6 +31,49 @@ def quickSort(arr, left, right):
 
 
 quickSort(arr, 0, len(arr)-1)
+print('quickSort: ', arr)
+
+# ---------- another_two_quickSorts ----------
+#
+
+
+def another_quickSort(arr, left, right):
+    if left < right:
+        # index = partition(arr, left, right)
+        index = partition2(arr, left, right)
+        another_quickSort(arr, left, index - 1)
+        another_quickSort(arr, index + 1, right)
+
+
+def partition(arr, left, right):
+    # while 前后遍历
+    index = right
+    while left < right:
+        if arr[left] <= arr[index]:
+            left += 1
+        else:
+            arr[left], arr[right - 1] = arr[right - 1], arr[left]
+            right -= 1
+    arr[right], arr[index] = arr[index], arr[right]
+    return right
+
+
+def partition2(arr, left, right):
+    # 根据《算法导论》伪代码
+    i = left - 1
+    for j in range(left, right):
+        if arr[j] <= arr[right]:
+            i += 1
+            arr[i], arr[j] = arr[j], arr[i]
+    arr[i + 1], arr[right] = arr[right], arr[i + 1]
+    return i + 1
+
+
+another_quickSort(arr, 0, len(arr) - 1)
+print('another_quickSort: ', arr)
+
+# ---------- bubbleSort ----------
+#
 
 
 def bubbleSort(arr):
@@ -47,7 +91,10 @@ def bubbleSort(arr):
     return arr
 
 
-print(bubbleSort(arr))
+print('bubbleSort: ', bubbleSort(arr))
+
+# ---------- selectSort ----------
+#
 
 
 def selectSort(arr):
@@ -63,7 +110,10 @@ def selectSort(arr):
     return arr
 
 
-print(selectSort(arr))
+print('selectSort: ', selectSort(arr))
+
+# ---------- insertSort ----------
+#
 
 
 def insertSort(arr):
@@ -79,7 +129,10 @@ def insertSort(arr):
     return arr
 
 
-print(insertSort(arr))
+print('insertSort: ', insertSort(arr))
+
+# ---------- shellSort ----------
+#
 
 
 def shellSort(arr):
@@ -101,7 +154,10 @@ def shellSort(arr):
     return arr
 
 
-print(shellSort(arr))
+print('shellSort: ', shellSort(arr))
+
+# ---------- mergeSort ----------
+#
 
 
 def mergeSort(arr):
@@ -128,10 +184,13 @@ def merge(L, R):
     return result
 
 
-print(mergeSort(arr))
+print('mergeSort: ', mergeSort(arr))
+
+# ---------- heapSort ----------
+#
 
 
-def heap_sort(arr):
+def heapSort(arr):
 
     # 创建最大堆
     for start in range((len(arr) - 2) // 2, -1, -1):
@@ -160,7 +219,10 @@ def sift_down(arr, start, end):
             break
 
 
-print(heap_sort(arr))
+print('heapSort: ', heapSort(arr))
+
+# ---------- countingSort ----------
+#
 
 
 def countingSort(arr):
@@ -178,107 +240,4 @@ def countingSort(arr):
     return result
 
 
-print(countingSort(arr))
-
-
-# 二叉树
-
-
-# 二叉树
-# 添加子树
-# 深度查找 & 广度查找
-
-
-from queue import Queue
-
-
-class BinaryTree:
-    def __init__(self, value):
-        self.value = value
-        self.lc = None
-        self.rc = None
-
-    def insert_left(self, value):
-        if self.lc is None:
-            self.lc = BinaryTree(value)
-        else:
-            new_node = BinaryTree(value)
-            new_node.lc = self.lc
-            self.lc = new_node
-
-    def insert_right(self, value):
-        if self.rc is None:
-            self.rc = BinaryTree(value)
-        else:
-            new_node = BinaryTree(value)
-            new_node.rc = self.rc
-            self.rc = new_node
-
-    def pre_order(self):
-        print(self.value)
-
-        if self.lc:
-            self.lc.pre_order()
-
-        if self.rc:
-            self.rc.pre_order()
-
-    def in_order(self):
-        if self.lc:
-            self.lc.in_order()
-
-        print(self.value)
-
-        if self.rc:
-            self.rc.in_order()
-
-    def post_order(self):
-        if self.lc:
-            self.lc.post_order()
-
-        if self.rc:
-            self.rc.post_order()
-
-        print(self.value)
-
-    def bfs(self):
-        queue = Queue()
-        queue.put(self)
-
-        while not queue.empty():
-            current_node = queue.get()
-            print(current_node.value)
-
-            if current_node.lc:
-                queue.put(current_node.lc)
-
-            if current_node.rc:
-                queue.put(current_node.rc)
-
-
-a_node = BinaryTree('a')
-a_node.insert_left('b')
-a_node.insert_right('c')
-
-b_node = a_node.lc
-b_node.insert_right('d')
-
-c_node = a_node.rc
-c_node.insert_left('e')
-c_node.insert_right('f')
-
-d_node = b_node.rc
-e_node = c_node.lc
-f_node = c_node.rc
-
-
-for i in 'abcdef':
-    print(i + '_node: ', eval(i + '_node').value)
-print('a_node.pre_order: ')
-a_node.pre_order()
-print('a_node.in_order: ')
-a_node.in_order()
-print('a_node.post_order: ')
-a_node.post_order()
-print('a_node.bfs: ')
-a_node.bfs()
+print('countingSort: ', countingSort(arr))

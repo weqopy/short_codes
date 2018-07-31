@@ -10,12 +10,10 @@ class Solution:
         if ln == 0:
             return 0
 
-        min = nums[0]
-        for i in nums[1:]:
-            if i < min:
-                min = i
-        if min > 0:
-            return min
+        # 全为非负数
+        min_num = min(nums)
+        if min_num >= 0:
+            return min_num
 
         dp = 0
         res = 0

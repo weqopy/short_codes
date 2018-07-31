@@ -15,27 +15,25 @@ def memo(func):
 
 # 递归
 @memo
-def fib(n):
-    if n == 1:
-        return 0
-    elif n == 2:
+def fib_recursive(n):
+    if n < 2:
         return 1
-    else:
-        return fib(n - 1) + fib(n - 2)
+    return fib_recursive(n - 1) + fib_recursive(n - 2)
 
 
 # 迭代
-def fib_2(n):
-    if n == 1:
-        return 0
-    elif n == 2:
+def fib_iterate(n):
+    if n < 2:
         return 1
-    a, b = 0, 1
+    a, b = 1, 1
     while n > 2:
         a, b = b, a + b
         n -= 1
     return b
 
 
-print(fib(10))
-print(fib_2(10))
+# jupyter notebook 测试
+# #递归函数在 fib_recursive(989) 时栈溢出
+# 迭代函数在 fib_iterate(100000) 时为 100 ms 级别，10 ** 6 时为 10 s 级别
+print(fib_recursive(10))
+print(fib_iterate(10))

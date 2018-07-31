@@ -15,14 +15,17 @@ class Solution:
         if len3 != len1 + len2:
             return False
 
-        f = [[True] * (1 + len2) for i in range(1 + len1)]
-        # s1[i1 - 1] == s3[i1 + i2 - 1] && f[i1 - 1][i2]
+        f = [[False] * (1 + len2) for i in range(1 + len1)]
+        f[0][0] = True
         for i in range(1, 1 + len1):
-            f[i][0] = s1[i - 1] == s3[i - 1] and f[i - 1][0]
-        # s2[i2 - 1] == s3[i1 + i2 - 1] && f[i1][i2 - 1]
+            # f[i][0] = s1[i - 1] == s3[i - 1] and f[i - 1][0]
+            # s2 为空字符串时，直接对比 s1 s3 前 i 位
+            f[i][0] = s1[:i] == s3[:i]
         for i in range(1, 1 + len2):
-            f[0][i] = s2[i - 1] == s3[i - 1] and f[0][i - 1]
-        # i1 >= 1, i2 >= 1
+            # f[0][i] = s2[i - 1] == s3[i - 1] and f[0][i - 1]
+            # s1 为空字符串时，直接对比 s2 s3 前 i 位
+            f[0][i] = s2[:i] == s3[:i]
+
         for i1 in range(1, 1 + len1):
             for i2 in range(1, 1 + len2):
                 case1 = s1[i1 - 1] == s3[i1 + i2 - 1] and f[i1 - 1][i2]
