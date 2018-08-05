@@ -30,7 +30,7 @@ def quickSort(arr, left, right):
     quickSort(arr, left + 1, high)
 
 
-quickSort(arr, 0, len(arr)-1)
+quickSort(arr, 0, len(arr) - 1)
 print('quickSort: ', arr)
 
 # ---------- another_two_quickSorts ----------
@@ -234,7 +234,9 @@ def countingSort(arr):
         count[i] = count[i] + 1
     for j in range(1, m + 1):
         count[j] = count[j] + count[j - 1]
-    for k in arr:
+
+    # 最后一步，逆序循环，保持稳定性
+    for k in arr[::-1]:
         result[count[k] - 1] = k
         count[k] = count[k] - 1
     return result
