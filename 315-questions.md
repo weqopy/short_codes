@@ -1279,6 +1279,8 @@ select * from tb where name = ‘Oldboy - Wupeiqi’ limit1
 
 ### 20、1000w 条数据，使用 limit offset 分页时，为什么越往后翻越慢？如何解决？
 
+offset 值过大；增加 order by，建立索引
+
 ### 21、什么是索引合并？
 
 将几个索引的范围扫描合并成一个索引。
@@ -1289,31 +1291,72 @@ select * from tb where name = ‘Oldboy - Wupeiqi’ limit1
 
 ### 23、简述数据库读写分离？
 
+一般来说，数据库的写入比较影响查询效率，将数据库分为主从数据库，从数据库处理查询，主数据库处理写入、删除、更新等，数据库复制被用来把事务性操作导致的变更同步到集群中的从数据库。
+
 ### 24、简述数据库分库分表？（水平、垂直）
 
 ### 25、redis 和 memcached 比较？
 
 ### 26、redis 中数据库默认是多少个 db 及作用？
 
+默认16个 db。默认情况下 Redis 连接到数据库 0.
+
 ### 27、python 操作 redis 的模块？
+
+```python
+import redis
+# 直接连接
+r = redis.Redis(host='localhost', port=6379)
+# 连接池连接
+pool = redis.ConnectPool(host='localhost', port=6379)
+r = redis.Redis(connection_pool=pool)
+
+r.set('names', 'tom')
+```
 
 ### 28、如果 redis 中的某个列表中的数据量非常大，如果实现循环显示每一个值？
 
+使用 scan 遍历
+
 ### 29、redis 如何实现主从复制？以及数据同步机制？
 
+```
+1. 从机器的 redis.conf 添加 slaveof 主 IP 端口，然后通过配置文件启动
+# src/redis-server redis.conf
+2. 从机器启动后输入全局命令 slaveof 主 IP 端口
+# 127.0.0.1 6379> slaveof 192.168.10.10 6379
+
+从机器关闭同步
+# src/redis-server no one
+```
+
 ### 30、redis 中的 sentinel 的作用？
+
+监控多个 master-slave 集群，发现 master 宕机后自动切换
 
 ### 31、如何实现 redis 集群？
 
 ### 32、redis 中默认有多少个哈希槽？
 
+> 2 ** 14 = 16384 个
+
 ### 33、简述 redis 的有哪几种持久化策略及比较？
+
+RDB：可以手动或自动执行。产生一个经过压缩的二进制 RDB 文件，被保存在硬盘中，redis 可以通过该文件还原数据库状态。
+
+AOF：通过保存 Redis 服务器锁执行的写状态来记录数据库。
+
+> RDB持久化相当于备份数据库状态，而AOF持久化是备份数据库接收到的命令，所有被写入AOF的命令都是以redis的协议格式来保存的。
+> AOF更安全，可将数据及时同步到文件中，但需要较多的磁盘IO，AOF文件尺寸较大，文件内容恢复相对较慢， 也更完整。
+> RDB持久化，安全性较差，它是正常时期数据备份及 master-slave数据同步的最佳手段，文件尺寸较小，恢复速度较快。
 
 ### 34、列举 redis 支持的过期策略。
 
 ### 35、MySQL 里有 2000w 数据，redis 中只存 20w 的数据，如何保证 redis 中都是热点数据？
 
-### 36、写代码，基于 redis 的列表实现 先进先出、后进先出队列、优先级队列。
+数据淘汰策略。根据需要选择可行策略。
+
+### 36、写代码，基于 redis 的列表实现先进先出、后进先出队列、优先级队列。
 
 ### 37、如何基于 redis 实现消息队列？
 
