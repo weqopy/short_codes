@@ -10,14 +10,38 @@ class Singleton:
         return "Singleton module"
 
 
-def test_Singleton():
+from functools import wraps
+
+
+def singleton(cls):
+    instances = {}
+
+    @wraps(cls)
+    def get_instance(*args, **kwargs):
+        if cls not in instances:
+            instances[cls] = cls(*args, **kwargs)
+        return instances[cls]
+
+    return get_instance
+
+
+@singleton
+class MySingleton:
+    pass
+
+
+def test_singleton():
     s1 = Singleton()
     s2 = Singleton()
     print(s1)
-    print(dir(s1))
+    print(s1 == s2)
+    print(id(s1), id(s2))
+    s1 = MySingleton()
+    s2 = MySingleton()
+    print(s1)
     print(s1 == s2)
     print(id(s1), id(s2))
 
 
 if __name__ == "__main__":
-    test_Singleton()
+    test_singleton()
