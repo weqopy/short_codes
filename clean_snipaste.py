@@ -1,3 +1,5 @@
+# stop updating
+# copy to configs
 import os, shutil
 from datetime import datetime
 
