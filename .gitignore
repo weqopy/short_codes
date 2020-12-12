@@ -2,6 +2,9 @@
 # Created by https://www.gitignore.io/api/vim,macos,python,pycharm,visualstudiocode
 # .gitignore for vim, macos, python, pycharm, visualstudiocode
 
+/down_web_html/Raindrop.io.html
+/down_web_html/downloaded_url.txt
+
 ### macOS ###
 *.DS_Store
 .AppleDouble
