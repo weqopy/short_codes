@@ -101,3 +101,11 @@ if __name__ == "__main__":
         crx_files = [f"{cwd}/AdBlock_4.24.1_0.crx"]
         print(f"args--source_file:{source_file}--downloaded_file:{downloaded_file}--crx_files:{crx_files}")
         main(source_data, downloaded_urls, crx_files)
+
+    download_path = f"{user_name}/Downloads"
+    for item in os.listdir(download_path):
+        item_path = folder + item
+        if ".mhtml" in item_path:
+            shutil.move(item_path, f"{cwd}/Documents/web_html/")
+        elif item == "Raindrop.io.html":
+            shutil.move(item_path, cwd)
