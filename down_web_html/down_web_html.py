@@ -1,4 +1,5 @@
 import os, sys, time
+import shutil
 from selenium import webdriver
 import pyautogui, eventlet
 from get_source_data import get_source_data
@@ -67,7 +68,7 @@ def main(source_data, downloaded_urls, crx_files):
                 pyautogui.keyUp('v')
                 # pyautogui.typewrite(title)
                 if flag:
-                    for i in range(11):
+                    for i in range(8):
                         pyautogui.hotkey('tab')
                     pyautogui.hotkey('space')
                     pyautogui.hotkey('up')
@@ -103,9 +104,9 @@ if __name__ == "__main__":
         main(source_data, downloaded_urls, crx_files)
 
     download_path = f"{user_name}/Downloads"
-    for item in os.listdir(download_path):
-        item_path = folder + item
-        if ".mhtml" in item_path:
-            shutil.move(item_path, f"{cwd}/Documents/web_html/")
-        elif item == "Raindrop.io.html":
-            shutil.move(item_path, cwd)
+for item in os.listdir(download_path):
+    item_path = f"{download_path}/{item}"
+    if ".mhtml" in item_path:
+        shutil.move(item_path, f"{user_name}/Documents/web_html/")
+    elif item == "Raindrop.io.html":
+        shutil.move(item_path, cwd)
