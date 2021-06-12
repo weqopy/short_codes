@@ -4,6 +4,7 @@
 
 /down_web_html/Raindrop.io.html
 /down_web_html/downloaded_url.txt
+*/local_config.py
 
 ### macOS ###
 *.DS_Store
