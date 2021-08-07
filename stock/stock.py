@@ -10,9 +10,9 @@ print("login respond  error_msg:" + lg.error_msg)
 
 #### 获取历史K线数据 ####
 # 详细指标参数，参见“历史行情指标参数”章节
-
+columns = "code,open,high,low,close,turn,pctChg"
 data_list = []
-with open("stock_cs.csv") as file:
+with open("stock/stock_cs.csv") as file:
     data = file.readlines()
     for line in data:
         # time.sleep(0.01)
@@ -20,9 +20,9 @@ with open("stock_cs.csv") as file:
         code = (".").join([type.lower(), number])
         rs = bs.query_history_k_data_plus(
             code,
-            "date,code,open,high,low,close,preclose,volume,amount",
-            start_date="2021-06-24",
-            end_date="2021-06-24",
+            columns,
+            start_date="2021-07-20",
+            end_date="2021-07-20",
         )
 
         i = 0
@@ -37,19 +37,9 @@ with open("stock_cs.csv") as file:
 # print(data_list)
 result = pd.DataFrame(
     data_list,
-    columns=[
-        "date",
-        "code",
-        "open",
-        "high",
-        "low",
-        "close",
-        "preclose",
-        "volume",
-        "amount",
-    ],
+    columns=columns.split(","),
 )
-result.to_csv(f"stock_value.csv", index=False)
+result.to_csv(f"stock/stock_value.csv", index=False)
 
 # print(data_list)
 # with open("stock/stock_data.csv", "w") as f:
