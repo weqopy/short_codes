@@ -9,3 +9,5 @@ logger.info('info message')
 # logger.add("file_{time}.log")
 
 logger.info(f'info{23} file message')
+
+logger.info("github web editor")
