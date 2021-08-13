@@ -10,4 +10,3 @@ logger.info('info message')
 
 logger.info(f'info{23} file message')
 
-logger.info("github web editor")
