@@ -1,0 +1,42 @@
+
+#------------
+apt update
+
+apt install gcc g++ make
+curl -sL https://deb.nodesource.com/setup_14.x | bash -
+apt install yarn
+
+apt install ruby
+
+gem install bundler
+gem install rails
+apt install sqlite3 libsqlite3-dev
+
+rails new db_demo
+cd db_demo
+
+rails webpacker:install
+bin/rails server
+
+#-------------
+docker inspect
+
+cd ~/Library/Containers/com.docker.docker/Data/vms/0
+screen tty
+>> [screen is terminating]
+docker run -it --privileged --pid=host justincormack/nsenter1
+
+cd /var/lib/docker/containers/[Container ID]
+
+vi config.v2.json
+"ExposedPorts":{"80/tcp":{},"7890/tcp":{}}
+
+vi hostconfig.json
+{"22/tcp":[{"HostIp":"","HostPort":"22223"}],"3000/tcp":[{"HostIp":"","HostPort":"30000"}]}
+
+
+
+find ./app/models/*.rb -mmin  -10 | xargs -i cp {} ~/docker_share/db_files
+find ./db/migrate/*.rb -mmin  -10 | xargs -i cp {} ~/docker_share/db_files
+
+
