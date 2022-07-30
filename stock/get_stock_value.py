@@ -58,7 +58,7 @@ if __name__ == "__main__":
     for row in df.itertuples():
         print(row[1:])
         temp_name = f"{row[1]}_{row[2]}.csv"
-        if temp_name in exists_files:
+        if temp_name in exists_files or row[3] == "None":
             continue
         
         main(row[1:])
